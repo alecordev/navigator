@@ -1,0 +1,19 @@
+macros:
+    - macro1:
+        config:
+            schedule: not implemented
+        steps:
+            - open: about:blank
+            - wait: 2
+            - click: 
+                - id: element_id
+                - xpath: xpath
+    - macro2:
+        config:
+            schedule: not implemented
+        steps:
+            - open: about:blank
+            - wait: 5
+            - click: 
+                - id: element_id
+                - xpath: xpath
