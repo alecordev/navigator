@@ -19,11 +19,20 @@ class SetupDriver():
     def __exit__(self, *args):
         self.driver.quit()
 
-with open('config.yaml') as f:
-    config = yaml.load(f)
+def main():
 
-with open('macros.yaml') as f:
-    macros = yaml.load(f)
+    with open('config.yaml') as f:
+        config = yaml.load(f)
+
+    with open('macros.yaml') as f:
+        macros = yaml.load(f)
+
+    defined_actions = set(['open', 'click', 'wait'])
+
+    for macro_counter, macro in enumerate(macros['macros']):
+        print('Macro #{c}'.format(c=macro_counter))
+        for properties in macro:
+            process(macro[properties]['steps'])
 
 def process(steps):
     with SetupDriver('firefox') as driver:
@@ -39,9 +48,5 @@ def process(steps):
             except Exception as e:
                 logger.error(e)
 
-defined_actions = set(['open', 'click', 'wait'])
-
-for macro_counter, macro in enumerate(macros['macros']):
-    print('Macro #{c}'.format(c=macro_counter))
-    for properties in macro:
-        process(macro[properties]['steps'])
+if __name__ == '__main__':
+    main()
